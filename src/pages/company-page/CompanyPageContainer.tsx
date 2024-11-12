@@ -1,5 +1,10 @@
 import { CompanyPageView } from "./CompanyPageView"
+import { AppWrapper } from '../../layout/app-wrapper/AppWrapper'
 
 export const CompanyPage = () => {
-  return <CompanyPageView />
+  return (
+    <AppWrapper>
+      <CompanyPageView />
+    </AppWrapper>
+  )
 }
