@@ -30,7 +30,7 @@ export const PhotoSection = () => {
   }
   return (
     <div className="card__section card__section--photo">
-      <h2> ПРИЛОЖЕННЫЕ ФОТО <IconPrimary src={Edit} alt={'Edit'} /></h2>
+      <h3> ПРИЛОЖЕННЫЕ ФОТО <IconPrimary src={Edit} alt={'Edit'} /></h3>
       <div className="card__fields">
         <div className="photo">
           {photos.map((photo, index) => (

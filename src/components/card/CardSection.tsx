@@ -15,7 +15,7 @@ interface CardSectionProps {
 export const CardSection: React.FC<CardSectionProps> = ({ title, fields }) => {
   return (
     <div className="card__section">
-      <h2>{title}   <IconPrimary src={Edit} alt={'Edit'}/></h2>
+      <h3>{title}   <IconPrimary src={Edit} alt={'Edit'} /></h3>
       <div className="card__fields">
         {fields.map((field, index) => (
           <div className="field" key={index}>
