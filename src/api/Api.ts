@@ -1,6 +1,6 @@
-import instance from "./axiosInstance";
+import instance from "./AxiosInstance";
 
-export const getToken = async (username) => {
+export const getToken = async (username: string): Promise<string> => {
   try {
     const response = await instance.get('/auth', {
       params: { user: username }
