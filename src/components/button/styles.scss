@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $primary-color;
+  padding: 10px 40px 10px 12px;
+  width: 400px;
+  border: $border;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 160%;
+  background-color: transparent;
+  font-family: $font-family;
+  transition: all $transition-duration;
+  cursor: pointer;
+
+  span {
+    flex-grow: 1;
+  }
+
+  .button__icon {
+    display: block;
+    width: 16px;
+    font-size: 24px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    font-weight: 400;
+  }
+
+  &:hover {
+    color: $hover-button;
+    border-color: $border-color-hover;
+  }
+
+  &:active {
+    border-color: $border-color-hover;
+    color: $primary-color-active;
+  }
+}

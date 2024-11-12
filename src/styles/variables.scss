@@ -1,16 +1,21 @@
 $primary-color: #82b284;
+$primary-color-active: #58A742;
 $hover: #A4C7A5;
+$hover-button: #98C88C;
 $secondary-color: #4A7857; 
 $background-color: #fff;
 $secondary-bg-color: #F7F7F7; 
-$accent-bg-color: #EEEEEE;
+$accent-bg-color: #EEE;
 $text-color: #222;
+$text-color-card: #3b3b3b;
 $light-text-color: #666; 
+$gray: #808080;
 
 // Размеры
 $sidebar-width: 48px;
 $icon-size: 20px;
-$padding: 20px;
+$paddingX: 40px;
+$paddingY: 24px;
 
 
 // Шрифты
@@ -19,6 +24,7 @@ $font-size: 16px;
 $heading-font-size: 24px;
 
 // Прочие переменные
-$transition-duration: 0.3s ease-in-out 0.3s; 
+$transition-duration: 0.1s ease-in-out 0.3s; 
 $border: 1px solid #E5E5E5;
+$border-color-hover: #CDCDCD;
 

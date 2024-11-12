@@ -1,29 +1,120 @@
 @use '../../styles/variables' as *;
 
 .card {
-   flex-grow: 1;
-   background-color: $background-color;
+  flex-grow: 1;
+  background-color: $background-color;
 }
 
 .card__header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 35px 15px 40px;
-    border-bottom: $border;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 35px 15px 40px;
+  border-bottom: $border;
 }
 
 .card__nav {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: $primary-color;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: $primary-color;
+  gap: 16px;
 }
 
 .card__nav-button {
-    padding: 10px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    margin-left: 4px;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.card__content {
+  padding: $paddingY $paddingX;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.card__section {
+  padding:  $paddingY 0;
+  border-bottom: $border;
+  margin-bottom: 8px;
+
+
+  h2 {
+    font-size: $font-size;
+    line-height: 20px;
+    font-weight: 300;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.card__fields {
+  padding-top: 11px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.field__label {
+  flex: 0 0 15%;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 160%;
+  letter-spacing: 0.25px;
+  margin: 0;
+}
+
+.field__value {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 160%;
+  letter-spacing: 0.25px;
+  margin: 0;
+}
+
+.photo {
+  display: flex;
+  gap: $paddingY;
+  padding-top: 10px;
+  padding-bottom: 18px;
+}
+
+.photo__item {
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
+
+.photo__image {
+  border-radius: 2px;
+  aspect-ratio: 160/160;
+}
+
+.photo__title {
+  margin: 0;
+  font-size: 12px;
+};
+
+.photo__date {
+  margin: 0;
+  color: $gray;
+}
+
+.card__section--photo {
+  padding-bottom: 29px;
+  margin-bottom: 0;
+  padding-top: 27px;
+
 }

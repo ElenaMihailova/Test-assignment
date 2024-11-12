@@ -1,6 +1,10 @@
 @use '../../styles/variables' as *;
 
-.header {
+.navigation {
+  display: flex;
+}
+
+.navigation__wrap {
   width: $sidebar-width;
   background-color: $primary-color;
   display: flex;
@@ -8,7 +12,6 @@
   align-items: center;
   padding: 0;
   padding-top: 5px;
-  min-height: 85%;
 }
 
 .menu {
