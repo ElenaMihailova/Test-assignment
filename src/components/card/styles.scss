@@ -1,0 +1,29 @@
+@use '../../styles/variables' as *;
+
+.card {
+   flex-grow: 1;
+   background-color: $background-color;
+}
+
+.card__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 35px 15px 40px;
+    border-bottom: $border;
+}
+
+.card__nav {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: $primary-color;
+    gap: 16px;
+}
+
+.card__nav-button {
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: 4px;
+}

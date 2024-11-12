@@ -1,0 +1,59 @@
+@use '../../styles/variables' as *;
+
+.header {
+  width: $sidebar-width;
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  padding-top: 5px;
+  min-height: 85%;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  a {
+    width: 48px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color $transition-duration;
+
+    &:hover {
+      background-color: $hover;
+
+
+    }
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon--middle {
+  width: 20px;
+  height: 20px;
+}
+
+.menu--bottom {
+  margin-top: auto;
+}
