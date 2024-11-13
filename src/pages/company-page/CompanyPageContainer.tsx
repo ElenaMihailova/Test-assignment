@@ -5,6 +5,7 @@ import { AppWrapper } from '../../layout/app-wrapper/AppWrapper';
 import { getCompanyInfo, getContactInfo, updateCompanyInfo, updateContactInfo, deleteCompany, addCompanyImage, deleteCompanyImage } from '../../api/Api';
 import { CompanyInfo, ContactInfo, PhotoInfo } from '../../types';
 import { COMPANY_ID, CONTACT_ID } from "../../const/constants"
+import { EmptyPage } from "../empty-page/EmptyPageContainer"
 
 export const CompanyPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
@@ -24,7 +25,6 @@ export const CompanyPage: React.FC = () => {
 
       const companyData = await getCompanyInfo(activeCompanyId, token);
       setCompanyInfo(companyData);
-
       const contactData = await getContactInfo(CONTACT_ID, token);
       setContactInfo(contactData);
     } catch (error) {
@@ -182,7 +182,7 @@ export const CompanyPage: React.FC = () => {
 
 
   if (error) return <p>{error}</p>;
-  if (!companyInfo) return <p>Нет информации</p>;
+  if (!companyInfo) return <EmptyPage />;
   if (!contactInfo) return <p>Загрузка контактной информации...</p>;
 
   return (

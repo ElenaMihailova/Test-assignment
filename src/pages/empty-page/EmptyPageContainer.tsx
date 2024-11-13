@@ -1,6 +1,11 @@
+import { AppWrapper } from '../../layout/app-wrapper/AppWrapper';
+import { EmptyPageView } from './EmptyPageView';
+
 
 export const EmptyPage = () => {
-    return (
-        
-    )
+  return (
+    <AppWrapper>
+      <EmptyPageView />
+    </AppWrapper>
+  )
 }
