@@ -17,7 +17,7 @@ interface CardProps {
   onSaveContact?: () => void;
   onDeleteCompany: () => void;
   onAddPhoto: (file: File) => void;
-  onDeletePhoto: (imageName: string) => void; 
+  onDeletePhoto: (imageName: string) => void;
 }
 
 export const Card: React.FC<CardProps> = ({ companyInfo,
@@ -29,7 +29,7 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
   onSaveContact,
   onDeleteCompany,
   onAddPhoto,
-  onDeletePhoto,}) => {
+  onDeletePhoto, }) => {
   const sections = [
     {
       title: 'ОБЩАЯ ИНФОРМАЦИЯ',
@@ -50,7 +50,12 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
       fields: [
         { label: 'ФИО:', value: `${contactInfo.lastname} ${contactInfo.firstname} ${contactInfo.patronymic}`, editable: true },
         { label: 'Телефон:', value: contactInfo.phone || 'Информация недоступна', editable: true },
-        { label: 'Эл. почта:', value: contactInfo.email || 'Информация недоступна', editable: true },
+        {
+          label: 'Эл. почта:',
+          value: contactInfo.email || 'Информация недоступна',
+          editable: true,
+          className: contactInfo.email ? 'field--green' : '',
+        },
       ],
       onFieldChange: onContactFieldChange,
     },

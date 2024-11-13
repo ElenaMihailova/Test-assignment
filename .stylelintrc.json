@@ -1,7 +1,8 @@
 {
   "extends": "stylelint-config-standard-scss",
+  "plugins": ["stylelint-scss"],
   "rules": {
-    "indentation": 2,
+    "indentation": "tab",
     "no-empty-source": null,
     "color-no-invalid-hex": true,
     "max-nesting-depth": 3,

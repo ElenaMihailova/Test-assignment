@@ -2,6 +2,10 @@
 
 .navigation {
   display: flex;
+
+  @media (max-width: $screen-sm) {
+    display: none;
+  }
 }
 
 .navigation__wrap {
@@ -41,8 +45,6 @@
 
     &:hover {
       background-color: $hover;
-
-
     }
   }
 }

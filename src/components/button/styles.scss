@@ -52,4 +52,14 @@
 .button--edit {
   width: 20px;
   border: none;
+  transition: $transition-duration;
+
+  &:active,
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.button--save {
+  display: block;
 }

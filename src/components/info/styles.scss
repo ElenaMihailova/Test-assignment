@@ -4,6 +4,10 @@
   width: 224px;
   background-color: $secondary-bg-color;
   padding-top: 20px;
+
+  @media (max-width: $screen-md) {
+    width: 200px;
+  }
 }
 
 .info__title {

@@ -91,7 +91,6 @@ export const CompanyPage: React.FC = () => {
     }
 
     try {
-      console.log('Отправляемые данные компании:', companyInfo);
       const updatedCompany = await updateCompanyInfo(COMPANY_ID, companyInfo, token);
       setCompanyInfo(updatedCompany);
     } catch (error) {
@@ -107,9 +106,14 @@ export const CompanyPage: React.FC = () => {
       return;
     }
 
+    if (!contactInfo) {
+      setError('Контактная информация недоступна');
+      return;
+    }
+
     try {
       const updatedContact = await updateContactInfo(CONTACT_ID, contactInfo, token);
-      setContactInfo(updatedContact); // Обновление только contactInfo
+      setContactInfo(updatedContact);
     } catch (error) {
       console.error("Ошибка при обновлении контактной информации:", error);
       setError('Не удалось обновить контактную информацию');
@@ -170,7 +174,6 @@ export const CompanyPage: React.FC = () => {
           ? { ...prevInfo, photos: prevInfo.photos.filter((photo) => photo.name !== imageName) }
           : null
       );
-      console.log(`Фото ${imageName} успешно удалено`);
     } catch (error) {
       console.error('Ошибка при удалении фото:', error);
       setError('Не удалось удалить фото');

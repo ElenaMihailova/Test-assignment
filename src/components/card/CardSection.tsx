@@ -7,6 +7,7 @@ interface Field {
   label: string;
   value: string;
   editable?: boolean;
+  className?: string;
 }
 
 interface CardSectionProps {
@@ -52,7 +53,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
       </h3>
       <div className="card__fields">
         {fields.map((field, index) => (
-          <div className="field" key={index}>
+           <div key={index} className={`field ${field.className || ''}`}>
             <p className="field__label">{field.label}</p>
             {isEditing && field.editable ? (
               <EditableInput
