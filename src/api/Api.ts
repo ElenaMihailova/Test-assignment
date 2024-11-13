@@ -62,7 +62,6 @@ export const getContactInfo = async (contactId: string, token: string) => {
   }
 };
 
-
 export const updateCompanyInfo = async (
   companyId: string,
   updatedData: {
@@ -77,10 +76,23 @@ export const updateCompanyInfo = async (
   },
   token: string
 ) => {
+  const dataToSend = {
+    name: updatedData.name,
+    shortName: updatedData.shortName,
+    businessEntity: updatedData.businessEntity,
+    contract: updatedData.contract
+      ? {
+        no: updatedData.contract.no,
+        issue_date: updatedData.contract.issue_date,
+      }
+      : undefined,
+    type: updatedData.type,
+  };
+
   try {
     const response = await instance.patch(
       `/companies/${companyId}`,
-      updatedData,
+      dataToSend,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -94,6 +106,7 @@ export const updateCompanyInfo = async (
     throw error;
   }
 };
+
 
 export const deleteCompany = async (companyId: string, token: string) => {
   try {
@@ -143,10 +156,18 @@ export const updateContactInfo = async (
   },
   token: string
 ) => {
+  const dataToSend = {
+    lastname: updatedData.lastname,
+    firstname: updatedData.firstname,
+    patronymic: updatedData.patronymic,
+    phone: updatedData.phone,
+    email: updatedData.email,
+  };
+
   try {
     const response = await instance.patch(
       `/contacts/${contactId}`,
-      updatedData,
+      dataToSend,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -160,7 +181,4 @@ export const updateContactInfo = async (
     throw error;
   }
 };
-
-
-
 

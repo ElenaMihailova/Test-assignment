@@ -22,11 +22,11 @@ export const TitleCard: React.FC<TitleCardProps> = ({ name, onNameChange }) => {
   return (
     <div className='title'>
       {isEditing ? (
-           <EditableInput
-           value={currentName}
-           onChange={(newValue) => setCurrentName(newValue)}
-           onSave={handleSave}
-         />
+        <EditableInput
+          value={currentName}
+          onChange={(newValue) => setCurrentName(newValue)}
+          onSave={handleSave}
+        />
       ) : (
         <h2 className="title__text">
           {currentName}

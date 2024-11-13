@@ -18,7 +18,6 @@ export const EditableInput: React.FC<EditableInputProps> = ({
 
   const handleBlur = () => {
     if (onBlur) onBlur();
-    onSave();
   };
 
   return (
