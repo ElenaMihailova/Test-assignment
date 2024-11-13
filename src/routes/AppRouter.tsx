@@ -8,12 +8,10 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/login" element={<AuthPage />} />
-
         <Route
           path="/company"
           element={<ProtectedRoute><CompanyPage /></ProtectedRoute>}
         />
-
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>

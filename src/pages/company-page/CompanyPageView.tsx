@@ -1,17 +1,22 @@
+import { Card } from "../../components/card/Card";
+import './styles.scss';
+import { Navigation } from "../../components/navigation/Navigation";
+import { CompanyInfo, ContactInfo } from '../../types'; 
 
-import { Card } from "../../components/card/Card"
-import './styles.scss'
-import { Navigation } from "../../components/navigation/Navigation"
 
-export const CompanyPageView = () => {
+interface CompanyPageViewProps {
+  companyInfo: CompanyInfo;
+  contactInfo: ContactInfo;
+}
+
+export const CompanyPageView: React.FC<CompanyPageViewProps> = ({ companyInfo, contactInfo }) => {
   return (
     <>
       <h1 className="visually-hidden">Страница организации</h1>
       <Navigation />
       <div className="company">
-        <Card />
+        <Card companyInfo={companyInfo} contactInfo={contactInfo} />
       </div>
     </>
-
-  )
-}
+  );
+};
