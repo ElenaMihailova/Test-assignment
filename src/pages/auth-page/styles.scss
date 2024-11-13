@@ -9,6 +9,7 @@
   background-size: cover;
   background-position: center;
   gap: 10%;
+  flex-wrap: wrap;
 }
 
 .auth-page__card {
@@ -18,7 +19,6 @@
   padding: 32px;
   border-radius: 8px;
   box-shadow: 0 0 5px rgb(0 0 0 / 20%);
-  gap: 16px;
   color: $text-color-card;
 
   h2 {
@@ -26,6 +26,7 @@
     line-height: 36px;
     margin: 0;
     opacity: 0.7;
+    margin-bottom: 16px;
   }
 
   p {
@@ -40,9 +41,24 @@
     padding: 10px;
     margin: 0;
     border: $border;
+    margin-top: 16px;
 
     &:hover {
       outline: 0;
     }
+  }
+}
+
+.auth-page__error {
+  color: $error;
+  font-size: 14px;
+  margin-top: 8px;
+  min-height: 20px;
+  opacity: 0;
+  margin-bottom: 0;
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
   }
 }

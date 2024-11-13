@@ -7,8 +7,14 @@ import { COMPANY_ID, CONTACT_ID } from "../../const/constants"
 export const AuthPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async () => {
+    if (!username || username !== "user") {
+      setError("Имя пользователя User");
+      return;
+    }
+
     try {
       const token = await getToken(username);
       if (token) {
@@ -27,6 +33,7 @@ export const AuthPage = () => {
       username={username}
       setUsername={setUsername}
       handleLogin={handleLogin}
+      error={error}
     />
   );
 };
