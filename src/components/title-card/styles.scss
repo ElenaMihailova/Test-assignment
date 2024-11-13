@@ -15,3 +15,13 @@
     font-weight: 400;
   }
 }
+
+.title__edit {
+  display: flex;
+  gap: 10px;
+
+  .button--save {
+    width: auto;
+    padding: 10px;
+  }
+}
