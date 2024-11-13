@@ -26,7 +26,6 @@ export const Navigation = () => {
           </ul>
         </nav>
       </div>
-
       <Info />
     </div>
   );

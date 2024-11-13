@@ -1,4 +1,5 @@
 import instance from "./AxiosInstance";
+import axios from 'axios';
 
 export const getToken = async (username: string): Promise<string> => {
   try {
@@ -107,43 +108,31 @@ export const updateCompanyInfo = async (
   }
 };
 
-
-export const deleteCompany = async (companyId: string, token: string) => {
-  try {
-    const response = await instance.delete(`/companies/${companyId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Ошибка при удалении компании:', error);
-    throw error;
-  }
-};
-
-export const addCompanyImage = async (
-  companyId: string,
-  file: File,
-  token: string
-) => {
+export const addCompanyImage = async (companyId: string, file: File, token: string) => {
   const formData = new FormData();
   formData.append('file', file);
 
   try {
-    const response = await instance.post(`/companies/${companyId}/image`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await axios.post(
+      `/companies/${companyId}/image`,
+      formData,
+      {
+        baseURL: instance.defaults.baseURL,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`,
+        },
+      }
+    );
+
     return response.data;
   } catch (error) {
-    console.error('Ошибка при добавлении изображения компании:', error);
+    console.error('Ошибка при загрузке изображения:', error);
     throw error;
   }
 };
+
+
 
 export const updateContactInfo = async (
   contactId: string,
@@ -182,3 +171,17 @@ export const updateContactInfo = async (
   }
 };
 
+export const deleteCompany = async (companyId: string, token: string) => {
+  try {
+    const response = await instance.delete(`/companies/${companyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при удалении компании:', error);
+    throw error;
+  }
+};

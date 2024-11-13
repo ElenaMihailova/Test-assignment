@@ -4,11 +4,15 @@ import Delete from "../../assets/icons/Delete.png";
 import IconPrimary from "../../components/IconPrimary";
 import Arrow from "../../assets/icons/Arrow.png";
 
-export const HeaderCard = () => {
+interface HeaderCardProps {
+  onDeleteCompany: () => void;
+}
+
+export const HeaderCard: React.FC<HeaderCardProps> = ({ onDeleteCompany }) => {
   const buttons = [
     { src: Linked, alt: "Linked" },
     { src: Rotation, alt: "Rotation" },
-    { src: Delete, alt: "Delete" },
+    { src: Delete, alt: "Delete", action: onDeleteCompany },
   ];
 
   return (
@@ -18,7 +22,10 @@ export const HeaderCard = () => {
       </a>
       <div>
         {buttons.map((button, index) => (
-          <button key={index} className="card__nav-button">
+          <button
+            key={index}
+            className="card__nav-button"
+            onClick={button.action} >
             <IconPrimary src={button.src} alt={button.alt} />
           </button>
         ))}

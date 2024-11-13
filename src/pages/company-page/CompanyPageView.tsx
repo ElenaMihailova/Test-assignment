@@ -12,6 +12,8 @@ interface CompanyPageViewProps {
   onContactFieldChange: (label: string, newValue: string) => void;
   onSave: () => void;
   onSaveContact?: () => void;
+  onDeleteCompany: () => void;
+  onAddPhoto: (file: File) => void;
 }
 
 export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
@@ -22,6 +24,8 @@ export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
   onContactFieldChange,
   onSave,
   onSaveContact,
+  onDeleteCompany,
+  onAddPhoto,
 }) => {
   return (
     <>
@@ -35,7 +39,9 @@ export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
           onFieldChange={onFieldChange}
           onContactFieldChange={onContactFieldChange}
           onSave={onSave}
-          onSaveContact={onSaveContact} />
+          onSaveContact={onSaveContact}
+          onDeleteCompany={onDeleteCompany}
+          onAddPhoto={onAddPhoto} />
       </div>
     </>
   );

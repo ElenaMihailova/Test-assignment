@@ -11,16 +11,25 @@ interface Photo {
 
 interface PhotoSectionProps {
   photos: Photo[];
+  onAddPhoto: (file: File) => void;
 }
 
-export const PhotoSection: React.FC<PhotoSectionProps> = ({ photos }) => {
-  const onClickButton = () => {
-    console.log("Click");
+export const PhotoSection: React.FC<PhotoSectionProps> = ({ photos, onAddPhoto }) => {
+  const todayDate = new Date().toLocaleDateString();
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      onAddPhoto(file);
+    }
   };
 
   return (
     <div className="card__section card__section--photo">
-      <h3>ПРИЛОЖЕННЫЕ ФОТО <IconPrimary src={Edit} alt="Edit" /></h3>
+      <h3>ПРИЛОЖЕННЫЕ ФОТО
+        <button className="button button--edit">
+          <IconPrimary src={Edit} alt="Edit" />
+        </button></h3>
       <div className="card__fields">
         <div className="photo">
           {photos.map((photo, index) => (
@@ -33,11 +42,20 @@ export const PhotoSection: React.FC<PhotoSectionProps> = ({ photos }) => {
                 height={160}
               />
               <p className="photo__title">{photo.name}</p>
-              {photo.date && <p className="photo__date">{photo.date}</p>}
+              <p className="photo__date">{photo.date || todayDate}</p>
             </div>
           ))}
         </div>
-        <Button text="Добавить изображение" onClick={onClickButton} />
+        <input
+          type="file"
+          id="upload-photo"
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
+        <Button
+          text="Добавить изображение"
+          onClick={() => document.getElementById('upload-photo')?.click()}
+        />
       </div>
     </div>
   );

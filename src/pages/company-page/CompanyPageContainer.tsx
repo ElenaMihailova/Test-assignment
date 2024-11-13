@@ -1,8 +1,8 @@
 import { CompanyPageView } from "./CompanyPageView";
 import { AppWrapper } from '../../layout/app-wrapper/AppWrapper';
 import { useEffect, useState } from 'react';
-import { getCompanyInfo, getContactInfo, updateCompanyInfo, updateContactInfo } from '../../api/Api';
-import { CompanyInfo, ContactInfo } from '../../types';
+import { getCompanyInfo, getContactInfo, updateCompanyInfo, updateContactInfo, deleteCompany, addCompanyImage } from '../../api/Api';
+import { CompanyInfo, ContactInfo, PhotoInfo } from '../../types';
 
 export const CompanyPage: React.FC = () => {
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
@@ -117,11 +117,48 @@ export const CompanyPage: React.FC = () => {
     }
   };
 
+  const handleDeleteCompany = async () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      setError('Не удалось получить токен авторизации');
+      return;
+    }
 
+    try {
+      await deleteCompany(COMPANY_ID, token);
+      setCompanyInfo(null);
+      alert('Компания была успешно удалена');
+    } catch (error) {
+      console.error('Ошибка при удалении компании:', error);
+      setError('Не удалось удалить компанию');
+    }
+  };
+
+  const handleAddPhoto = async (file: File) => {
+    console.log("File details:", {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    });
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      setError('Не удалось получить токен авторизации');
+      return;
+    }
+
+    try {
+      const newPhoto: PhotoInfo = await addCompanyImage(COMPANY_ID, file, token);
+      setCompanyInfo((prevInfo) =>
+        prevInfo ? { ...prevInfo, photos: [...prevInfo.photos, newPhoto] } : null
+      );
+    } catch (error) {
+      alert("Ошибка при загрузке фото: " + error);
+    }
+  };
 
 
   if (error) return <p>{error}</p>;
-  if (!companyInfo) return <p>Загрузка информации о компании...</p>;
+  if (!companyInfo) return <p>Нет информации</p>;
   if (!contactInfo) return <p>Загрузка контактной информации...</p>;
 
   return (
@@ -134,6 +171,8 @@ export const CompanyPage: React.FC = () => {
         onContactFieldChange={handleContactFieldChange}
         onSave={saveCompanyInfo}
         onSaveContact={saveContactInfo}
+        onDeleteCompany={handleDeleteCompany}
+        onAddPhoto={handleAddPhoto}
       />
     </AppWrapper>
   );

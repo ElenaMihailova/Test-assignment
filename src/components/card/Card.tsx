@@ -15,6 +15,8 @@ interface CardProps {
   onContactFieldChange: (label: string, newValue: string) => void;
   onSave: () => void;
   onSaveContact?: () => void;
+  onDeleteCompany: () => void;
+  onAddPhoto: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({ companyInfo,
@@ -23,7 +25,9 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
   onFieldChange,
   onContactFieldChange,
   onSave,
-  onSaveContact }) => {
+  onSaveContact,
+  onDeleteCompany,
+  onAddPhoto }) => {
   const sections = [
     {
       title: 'ОБЩАЯ ИНФОРМАЦИЯ',
@@ -52,7 +56,7 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
 
   return (
     <div className="card">
-      <HeaderCard />
+      <HeaderCard onDeleteCompany={onDeleteCompany} />
       <div className="card__content">
         <TitleCard name={companyInfo.shortName} onNameChange={onNameChange} />
         {sections.map((section, index) => (
@@ -65,7 +69,7 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
             onSaveContact={index === 1 ? onSaveContact : undefined}
           />
         ))}
-        <PhotoSection photos={companyInfo.photos} />
+        <PhotoSection photos={companyInfo.photos} onAddPhoto={onAddPhoto} />
       </div>
     </div>
   );
