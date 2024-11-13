@@ -10,9 +10,10 @@ import { CompanyInfo, ContactInfo } from '../../types';
 interface CardProps {
   companyInfo: CompanyInfo;
   contactInfo: ContactInfo;
+  onNameChange: (newName: string) => void; 
 }
 
-export const Card: React.FC<CardProps> = ({ companyInfo, contactInfo }) => {
+export const Card: React.FC<CardProps> = ({ companyInfo, contactInfo, onNameChange }) => {
   const sections = [
     {
       title: 'ОБЩАЯ ИНФОРМАЦИЯ',
@@ -40,7 +41,7 @@ export const Card: React.FC<CardProps> = ({ companyInfo, contactInfo }) => {
     <div className="card">
       <HeaderCard />
       <div className="card__content">
-        <TitleCard name={companyInfo.shortName} />
+        <TitleCard name={companyInfo.shortName} onNameChange={onNameChange}/>
         {sections.map((section, index) => (
           <CardSection key={index} title={section.title} fields={section.fields} />
         ))}

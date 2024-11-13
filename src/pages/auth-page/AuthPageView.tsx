@@ -18,7 +18,7 @@ export const AuthPageView: React.FC<AuthPageViewProps> = ({
       <Logo />
       <div className="auth-page__card">
         <h2>Менеджер процесса</h2>
-        <p>Пожалуйста, авторизируйтесь</p>
+        <p>Пожалуйста, авторизируйтесь (user) </p>
         <input
           type="text"
           placeholder="Логин"
