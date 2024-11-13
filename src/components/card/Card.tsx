@@ -16,7 +16,8 @@ interface CardProps {
   onSave: () => void;
   onSaveContact?: () => void;
   onDeleteCompany: () => void;
-  onAddPhoto: () => void;
+  onAddPhoto: (file: File) => void;
+  onDeletePhoto: (imageName: string) => void; 
 }
 
 export const Card: React.FC<CardProps> = ({ companyInfo,
@@ -27,7 +28,8 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
   onSave,
   onSaveContact,
   onDeleteCompany,
-  onAddPhoto }) => {
+  onAddPhoto,
+  onDeletePhoto,}) => {
   const sections = [
     {
       title: 'ОБЩАЯ ИНФОРМАЦИЯ',
@@ -69,7 +71,7 @@ export const Card: React.FC<CardProps> = ({ companyInfo,
             onSaveContact={index === 1 ? onSaveContact : undefined}
           />
         ))}
-        <PhotoSection photos={companyInfo.photos} onAddPhoto={onAddPhoto} />
+        <PhotoSection photos={companyInfo.photos} onAddPhoto={onAddPhoto} onDeletePhoto={onDeletePhoto} />
       </div>
     </div>
   );

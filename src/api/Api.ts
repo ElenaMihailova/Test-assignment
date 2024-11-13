@@ -132,8 +132,6 @@ export const addCompanyImage = async (companyId: string, file: File, token: stri
   }
 };
 
-
-
 export const updateContactInfo = async (
   contactId: string,
   updatedData: {
@@ -185,3 +183,23 @@ export const deleteCompany = async (companyId: string, token: string) => {
     throw error;
   }
 };
+
+export const deleteCompanyImage = async (companyId: string, imageName: string, token: string) => {
+  try {
+    const response = await axios.delete(
+      `/companies/${companyId}/image/${imageName}`,
+      {
+        baseURL: instance.defaults.baseURL,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при удалении изображения:', error);
+    throw error;
+  }
+};
+

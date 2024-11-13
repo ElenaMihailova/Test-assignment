@@ -9,7 +9,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/login" element={<AuthPage />} />
         <Route
-          path="/company"
+          path="/company/:companyId/contact/:contactID"
           element={<ProtectedRoute><CompanyPage /></ProtectedRoute>}
         />
         <Route path="*" element={<Navigate to="/login" />} />

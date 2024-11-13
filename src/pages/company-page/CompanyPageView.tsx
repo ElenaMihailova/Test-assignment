@@ -14,6 +14,7 @@ interface CompanyPageViewProps {
   onSaveContact?: () => void;
   onDeleteCompany: () => void;
   onAddPhoto: (file: File) => void;
+  onDeletePhoto: (imageName: string) => void;
 }
 
 export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
@@ -26,6 +27,7 @@ export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
   onSaveContact,
   onDeleteCompany,
   onAddPhoto,
+  onDeletePhoto,
 }) => {
   return (
     <>
@@ -41,7 +43,8 @@ export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
           onSave={onSave}
           onSaveContact={onSaveContact}
           onDeleteCompany={onDeleteCompany}
-          onAddPhoto={onAddPhoto} />
+          onAddPhoto={onAddPhoto}
+          onDeletePhoto={onDeletePhoto} />
       </div>
     </>
   );

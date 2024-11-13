@@ -1,15 +1,18 @@
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { CompanyPageView } from "./CompanyPageView";
 import { AppWrapper } from '../../layout/app-wrapper/AppWrapper';
-import { useEffect, useState } from 'react';
-import { getCompanyInfo, getContactInfo, updateCompanyInfo, updateContactInfo, deleteCompany, addCompanyImage } from '../../api/Api';
+import { getCompanyInfo, getContactInfo, updateCompanyInfo, updateContactInfo, deleteCompany, addCompanyImage, deleteCompanyImage } from '../../api/Api';
 import { CompanyInfo, ContactInfo, PhotoInfo } from '../../types';
+import { COMPANY_ID, CONTACT_ID } from "../../const/constants"
 
 export const CompanyPage: React.FC = () => {
+  const { companyId } = useParams<{ companyId: string }>();
+
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const COMPANY_ID = '12';
-  const CONTACT_ID = '16';
+  const activeCompanyId = companyId || COMPANY_ID;
 
   const fetchCompanyData = async () => {
     try {
@@ -19,13 +22,11 @@ export const CompanyPage: React.FC = () => {
         return;
       }
 
-      const companyData = await getCompanyInfo(COMPANY_ID, token);
+      const companyData = await getCompanyInfo(activeCompanyId, token);
       setCompanyInfo(companyData);
-      console.log(companyData);
 
       const contactData = await getContactInfo(CONTACT_ID, token);
       setContactInfo(contactData);
-      console.log(contactData);
     } catch (error) {
       console.error(error)
       setError('Не удалось загрузить данные');
@@ -77,7 +78,6 @@ export const CompanyPage: React.FC = () => {
     });
   };
 
-
   const saveCompanyInfo = async () => {
     const token = localStorage.getItem('authToken');
     if (!token) {
@@ -99,7 +99,6 @@ export const CompanyPage: React.FC = () => {
       setError('Не удалось обновить информацию о компании');
     }
   };
-
 
   const saveContactInfo = async () => {
     const token = localStorage.getItem('authToken');
@@ -135,11 +134,6 @@ export const CompanyPage: React.FC = () => {
   };
 
   const handleAddPhoto = async (file: File) => {
-    console.log("File details:", {
-      name: file.name,
-      size: file.size,
-      type: file.type,
-    });
     const token = localStorage.getItem('authToken');
     if (!token) {
       setError('Не удалось получить токен авторизации');
@@ -153,6 +147,33 @@ export const CompanyPage: React.FC = () => {
       );
     } catch (error) {
       alert("Ошибка при загрузке фото: " + error);
+    }
+  };
+
+  const handleDeletePhoto = async (imageName: string) => {
+    if (!imageName) {
+      console.error("Не удалось удалить фото: имя файла не определено.");
+      setError("Не удалось удалить фото: имя файла не определено.");
+      return;
+    }
+
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      setError('Не удалось получить токен авторизации');
+      return;
+    }
+
+    try {
+      await deleteCompanyImage(COMPANY_ID, imageName, token);
+      setCompanyInfo((prevInfo) =>
+        prevInfo
+          ? { ...prevInfo, photos: prevInfo.photos.filter((photo) => photo.name !== imageName) }
+          : null
+      );
+      console.log(`Фото ${imageName} успешно удалено`);
+    } catch (error) {
+      console.error('Ошибка при удалении фото:', error);
+      setError('Не удалось удалить фото');
     }
   };
 
@@ -173,6 +194,7 @@ export const CompanyPage: React.FC = () => {
         onSaveContact={saveContactInfo}
         onDeleteCompany={handleDeleteCompany}
         onAddPhoto={handleAddPhoto}
+        onDeletePhoto={handleDeletePhoto}
       />
     </AppWrapper>
   );
