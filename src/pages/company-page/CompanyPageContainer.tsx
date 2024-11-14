@@ -28,8 +28,6 @@ export const CompanyPage: React.FC = () => {
   }
   if (companyError) return <p>{companyError}</p>;
   if (contactError) return <p>{contactError}</p>;
-  console.log('companyInfo:', companyInfo);
-console.log('contactInfo:', contactInfo);
 
   const handleNameChange = async (newShortName: string) => {
     const token = localStorage.getItem('authToken');
