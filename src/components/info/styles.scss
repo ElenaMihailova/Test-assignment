@@ -4,10 +4,24 @@
   width: 224px;
   background-color: $secondary-bg-color;
   padding-top: 20px;
+  position: relative;
 
   @media (max-width: $screen-md) {
     width: 200px;
   }
+}
+
+.info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 21px;
+  background: linear-gradient(270deg,
+      rgba(0, 0, 0, 0.072) 0%,
+      rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
 }
 
 .info__title {
