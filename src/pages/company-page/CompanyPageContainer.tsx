@@ -1,17 +1,20 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CompanyPageView } from "./CompanyPageView";
 import { AppWrapper } from '../../layout/app-wrapper/AppWrapper';
 import { updateCompanyInfo, updateContactInfo, deleteCompany, addCompanyImage, deleteCompanyImage } from '../../api/Api';
 import { PhotoInfo } from '../../types';
 import { COMPANY_ID, CONTACT_ID } from "../../const/constants";
 import { useCompanyInfo, useContactInfo } from '../../hooks/useCompanyInfo';
-import { useEffect } from 'react';
+import { Modal } from '../../components/modal/Modal';
+
 
 export const CompanyPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
   const navigate = useNavigate();
   const activeCompanyId = companyId || COMPANY_ID;
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const [error, setError] = useState<string | null>(null);
   const { data: companyInfo, isLoading: isCompanyLoading, error: companyError, setData: setCompanyInfo, refetch: refetchCompanyInfo } = useCompanyInfo(activeCompanyId);
@@ -111,11 +114,18 @@ export const CompanyPage: React.FC = () => {
     try {
       await deleteCompany(activeCompanyId, token);
       setCompanyInfo(null);
-      alert('Компания была успешно удалена');
+      setModalOpen(false);
     } catch (error) {
       console.error('Ошибка при удалении компании:', error);
-      setError('Не удалось удалить компанию');
     }
+  };
+
+  const openDeleteModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setModalOpen(false);
   };
 
   const handleRefreshData = () => {
@@ -179,10 +189,17 @@ export const CompanyPage: React.FC = () => {
         onContactFieldChange={handleContactFieldChange}
         onSave={saveCompanyInfo}
         onSaveContact={saveContactInfo}
-        onDeleteCompany={handleDeleteCompany}
+        onDeleteCompany={openDeleteModal}
         onRefreshData={handleRefreshData}
         onAddPhoto={handleAddPhoto}
         onDeletePhoto={handleDeletePhoto}
+      />
+      <Modal
+        title="Удалить карточку"
+        text="Отправить карточку организации в архив?"
+        onCancel={closeDeleteModal}
+        onDelete={handleDeleteCompany}
+        isOpen={isModalOpen}
       />
     </AppWrapper>
   );
