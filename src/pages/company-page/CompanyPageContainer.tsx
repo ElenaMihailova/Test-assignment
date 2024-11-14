@@ -7,16 +7,18 @@ import { PhotoInfo } from '../../types';
 import { COMPANY_ID, CONTACT_ID } from "../../const/constants";
 import { useCompanyInfo, useContactInfo } from '../../hooks/useCompanyInfo';
 import { Modal } from '../../components/modal/Modal';
-
+import { useToken } from '../../hooks/useToken';
 
 export const CompanyPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
   const navigate = useNavigate();
   const activeCompanyId = companyId || COMPANY_ID;
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const { getToken } = useToken();
 
+  const [isModalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const { data: companyInfo, isLoading: isCompanyLoading, error: companyError, setData: setCompanyInfo, refetch: refetchCompanyInfo } = useCompanyInfo(activeCompanyId);
   const { data: contactInfo, isLoading: isContactLoading, error: contactError, setData: setContactInfo, refetch: refetchContactInfo } = useContactInfo();
 
@@ -33,7 +35,7 @@ export const CompanyPage: React.FC = () => {
   if (contactError) return <p>{contactError}</p>;
 
   const handleNameChange = async (newShortName: string) => {
-    const token = localStorage.getItem('authToken');
+    const token = getToken();
     if (!token) return;
     try {
       const updatedCompany = await updateCompanyInfo(activeCompanyId, { shortName: newShortName }, token);
@@ -74,11 +76,8 @@ export const CompanyPage: React.FC = () => {
   };
 
   const saveCompanyInfo = async () => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      setError('Не удалось получить токен авторизации');
-      return;
-    }
+    const token = getToken();
+    if (!token) return;
 
     try {
       const updatedCompany = await updateCompanyInfo(activeCompanyId, companyInfo, token);
@@ -90,11 +89,8 @@ export const CompanyPage: React.FC = () => {
   };
 
   const saveContactInfo = async () => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      setError('Не удалось получить токен авторизации');
-      return;
-    }
+    const token = getToken();
+    if (!token) return;
 
     try {
       const updatedContact = await updateContactInfo(CONTACT_ID, contactInfo, token);
@@ -105,11 +101,8 @@ export const CompanyPage: React.FC = () => {
   };
 
   const handleDeleteCompany = async () => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      setError('Не удалось получить токен авторизации');
-      return;
-    }
+    const token = getToken();
+    if (!token) return;
 
     try {
       await deleteCompany(activeCompanyId, token);
@@ -124,10 +117,6 @@ export const CompanyPage: React.FC = () => {
     setModalOpen(true);
   };
 
-  const closeDeleteModal = () => {
-    setModalOpen(false);
-  };
-
   const handleRefreshData = () => {
     refetchCompanyInfo();
     refetchContactInfo();
@@ -135,11 +124,8 @@ export const CompanyPage: React.FC = () => {
   };
 
   const handleAddPhoto = async (file: File) => {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
-      setError('Не удалось получить токен авторизации');
-      return;
-    }
+    const token = getToken();
+    if (!token) return;
 
     try {
       const newPhoto: PhotoInfo = await addCompanyImage(activeCompanyId, file, token);
@@ -197,7 +183,7 @@ export const CompanyPage: React.FC = () => {
       <Modal
         title="Удалить карточку"
         text="Отправить карточку организации в архив?"
-        onCancel={closeDeleteModal}
+        onCancel={() => setModalOpen(false)}
         onDelete={handleDeleteCompany}
         isOpen={isModalOpen}
       />

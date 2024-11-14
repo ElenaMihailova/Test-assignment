@@ -3,6 +3,7 @@
 .card {
   flex-grow: 1;
   background-color: $background-color;
+  position: relative;
 }
 
 .card__header {
@@ -11,6 +12,9 @@
   padding: 15px 35px 15px 40px;
   border-bottom: $border;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  background-color: $background-color;
 
   @media (max-width: $screen-md) {
     justify-content: center;
