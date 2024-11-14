@@ -53,7 +53,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
       </h3>
       <div className="card__fields">
         {fields.map((field, index) => (
-           <div key={index} className={`field ${field.className || ''}`}>
+          <div key={index} className={`field ${field.className || ''}`}>
             <p className="field__label">{field.label}</p>
             {isEditing && field.editable ? (
               <EditableInput

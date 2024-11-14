@@ -8,6 +8,12 @@ import Exit from '../../assets/icons/Exit.png';
 import { Info } from '../info/Info';
 
 export const Navigation = () => {
+
+  const handleExitClick = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  };
+
   return (
     <div className="navigation">
       <div className='navigation__wrap'>
@@ -22,7 +28,7 @@ export const Navigation = () => {
           <ul>
             <li><a href="#"><img src={Setting} alt="Settings" className="icon" /></a></li>
             <li><a href="#"><img src={Chat} alt="Chat" className="icon" /></a></li>
-            <li><a href="#"><img src={Exit} alt="Exit" className="icon" /></a></li>
+            <li><a href="#" onClick={handleExitClick} ><img src={Exit} alt="Exit" className="icon" /></a></li>
           </ul>
         </nav>
       </div>

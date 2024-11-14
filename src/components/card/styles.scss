@@ -42,7 +42,16 @@
 
   &:active,
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
+  }
+
+  &:disabled {
+    cursor: auto;
+    opacity: 50%;
+  }
+
+  &:disabled:hover {
+    transform: none;
   }
 }
 

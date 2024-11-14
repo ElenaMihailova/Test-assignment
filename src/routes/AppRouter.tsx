@@ -14,7 +14,7 @@ const AppRouter = () => {
           element={<ProtectedRoute><CompanyPage /></ProtectedRoute>}
         />
         <Route
-          path="/list"
+          path="/company/:companyId"
           element={<ProtectedRoute><EmptyPage /></ProtectedRoute>}
         />
         <Route path="*" element={<Navigate to="/login" />} />
