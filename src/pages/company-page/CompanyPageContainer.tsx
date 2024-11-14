@@ -98,7 +98,6 @@ export const CompanyPage: React.FC = () => {
       setContactInfo(updatedContact);
     } catch (error) {
       console.error("Ошибка при обновлении контактной информации:", error);
-      setError('Не удалось обновить контактную информацию');
     }
   };
 

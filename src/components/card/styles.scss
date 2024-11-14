@@ -56,13 +56,13 @@
 }
 
 .card__content {
-  padding: 16px $paddingX 0;
+  padding: 16px $padding-x 0;
   display: flex;
   flex-direction: column;
 }
 
 .card__section {
-  padding: $paddingY 0;
+  padding: $padding-y 0;
   border-bottom: $border;
   margin-bottom: 18px;
   padding-top: 3px;
@@ -109,7 +109,7 @@
 
 .photo {
   display: flex;
-  gap: $paddingY;
+  gap: $padding-y;
   padding-top: 10px;
   padding-bottom: 12px;
   min-height: 208px;

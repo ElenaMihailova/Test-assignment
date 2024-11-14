@@ -1,6 +1,5 @@
 import { Card } from "../../components/card/Card";
 import './styles.scss';
-import { Navigation } from "../../components/navigation/Navigation";
 import { CompanyInfo, ContactInfo } from '../../types';
 
 
@@ -34,7 +33,6 @@ export const CompanyPageView: React.FC<CompanyPageViewProps> = ({
   return (
     <>
       <h1 className="visually-hidden">Страница организации</h1>
-      <Navigation />
       <div className="company">
         <Card
           companyInfo={companyInfo}
